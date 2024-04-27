@@ -28,6 +28,7 @@ def get_model_list():
 
 
 if __name__ == "__main__":
+    os.system("title QuickOllama")
     model_list = get_model_list()
 
     if not model_list:
