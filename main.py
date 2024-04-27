@@ -45,7 +45,9 @@ if __name__ == "__main__":
         index = input("\nType index here:")
 
         if check_input(index):
-            run_model(model_list[int(index) - 1])
+            model_name = model_list[int(index) - 1]
+            os.system(f"title {model_name}")
+            run_model(model_name)
         else:
             print("Invalid input")
             os.system("pause")
