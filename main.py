@@ -73,7 +73,7 @@ def get_model_list():
             "par_size": model["details"]["parameter_size"],
         }
         results.append(result)
-    return results
+    return sorted(results, key=lambda x: x["family"])
 
 
 def main_loop(model, stream):
@@ -121,9 +121,11 @@ if __name__ == "__main__":
     for index in range(len(models)):
         model_ = models[index]
         print(
-            f"{index + 1}. {model_['name']}\t\t   类别: {model_['family']}\t大小: {model_['size']}\t参数大小: {model_['par_size']}"
+            f"{index + 1}. {model_['name'].ljust(20)}",
+            f"类别: {model_['family'].ljust(10)}",
+            f"大小: {model_['size'].ljust(10)}",
+            f"参数大小: {model_['par_size']}",
         )
-
     index = input("\n请输入序号: ")
 
     if index not in [str(i) for i in range(1, len(models) + 1)]:
