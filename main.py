@@ -1,7 +1,4 @@
-import os
-import requests
-import json
-import subprocess
+import os, requests, json, subprocess
 from configparser import ConfigParser
 
 
@@ -27,6 +24,7 @@ def get_config():
 
 
 def request_api(model, text, stream=True, keep_alive="5m"):
+    # 请求api并输出结果
     url = HOME + "/api/generate"
 
     payload = {
@@ -60,6 +58,7 @@ def request_api(model, text, stream=True, keep_alive="5m"):
 
 
 def get_model_list():
+    # 返回格式化过的模型列表
     results = []
     url = HOME + "/api/tags"
     response = requests.get(url)
