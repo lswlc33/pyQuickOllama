@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+import subprocess
 from configparser import ConfigParser
 
 
@@ -43,7 +44,7 @@ def request_api(model, text, stream=True, keep_alive="5m"):
     response = requests.post(url, json=payload, stream=stream, timeout=99999)
 
     os.system("cls")
-    print("\nCAT >> ", end="")
+    print("\n😽 >> ", end="")
 
     if response.status_code != 200:
         print("Error:", response.status_code)
@@ -80,16 +81,23 @@ def main_loop(model, stream):
     text = ""
     while True:
         if first_input:
-            text = input("\nYOU >> ")
+            text = input("\n🤔 >> ")
             first_input = 0
 
         os.system("cls")
-        print("\nCAT >> Generating...", end="")
+        # print("\nCAT >> Generating...", end="")
+        print("\n😽 >> Generating...", end="")
         request_api(model, text, stream=stream)
-        text = input("\nYOU >> ")
+        text = input("\n🤯 >> ")
 
 
 if __name__ == "__main__":
+    # 启动 Ollama 服务器
+    subprocess.Popen(
+        "ollama serve", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
+
+    # 获取配置文件
     config = get_config()
     model = ""
     stream = bool(config["stream"])
@@ -105,7 +113,7 @@ if __name__ == "__main__":
 
     # 否则，列出模型列表供用户选择
     print("模型列表:\n")
-    print("加载中...")
+    print("加载中...\n")
     models = get_model_list()
 
     os.system("cls")
